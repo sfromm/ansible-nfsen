@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Init file for nfsend
+#
+# chkconfig: 2345 99 01
+# description: web-frontend nfsen
+#
+# processname: nfsend
+# config: /etc/nfsen.conf
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+# pull in sysconfig settings
+[ -f /etc/sysconfig/nfsen ] && . /etc/sysconfig/nfsen
+
+RETVAL=0
+prog="nfsend"
+NFSEND="{{nfsen_prefix}}/bin/nfsen"
+
+start()
+{
+    echo -n $"Starting $prog: "
+    $NFSEND start && success || failure
+    RETVAL=$?
+    [ "$RETVAL" = 0 ] && touch /var/lock/subsys/nfsen
+    echo
+}
+
+stop()
+{
+    echo -n $"Stopping $prog: "
+    $NFSEND stop && success || failure
+    RETVAL=$?
+    [ "$RETVAL" = 0 ] && rm -f /var/lock/subsys/nfsen
+    echo
+}
+
+reload()
+{
+    echo -n $"Reloading $prog: "
+    $NFSEND reconfig && success || failure
+    RETVAL=$?
+    [ "$RETVAL" = 0 ] && rm -f /var/lock/subsys/nfsen
+    echo
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    reload)
+        reload
+        ;;
+    restart)
+        stop
+        sleep 1
+        start
+        ;;
+    status)
+        $NFSEND status
+        RETVAL=$?
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|reload|restart|status}"
+        RETVAL=1
+esac
+exit $RETVAL
+

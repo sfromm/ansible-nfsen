@@ -46,5 +46,11 @@
       chdir={{nfsen_src_dir}}/{{nfsen_version}}
       ./install.pl /etc/nfsen.conf
 
+- name: template nfsend init script
+  template: >
+      src=nfsend.j2
+      dest=/etc/init.d/nfsend
+      owner=root group=root mode=0755
+
 - name: enable and start nfsend
   service: name=nfsend state=started enabled=yes pattern=bin/nfsend
