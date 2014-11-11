@@ -1,0 +1,7 @@
+---
+# handlers file for nfsen
+- name: restart nfsend
+  service: name=nfsend state=restarted
+
+- name: reconfig nfsend
+  command: "{{nfsen_prefix}}/bin/nfsen reconfig"

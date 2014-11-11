@@ -1,0 +1,8 @@
+---
+# defaults file for nfsen
+nfsen_version: nfsen-1.3.6p1
+nfsen_url: http://downloads.sourceforge.net/project/nfsen/stable/{{nfsen_version}}/{{nfsen_version}}.tar.gz
+nfsen_src_dir: /usr/local/src
+nfsen_prefix: /usr/local
+nfsen_user: netflow
+nfsen_group: netflow

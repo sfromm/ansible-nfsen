@@ -1,0 +1,14 @@
+---
+apache_user: apache
+nfsen_prereqs:
+    - httpd
+    - nfdump
+    - perl
+    - perl-Socket6
+    - php
+    - perl-Data-Dumper
+    - perl-MailTools
+    - perl-Sys-Syslog
+    - rrdtool
+    - rrdtool-perl
+    - patch

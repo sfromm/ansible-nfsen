@@ -1,0 +1,50 @@
+---
+# tasks file for nfsen
+- name: include os-specific variables
+  include_vars: "{{ansible_os_family}}.yml"
+
+- include: setup-redhat.yml
+  when: ansible_os_family == "RedHat"
+
+- name: ensure netflow user
+  user: name={{nfsen_user}} group=apache createhome=no
+
+- name: deploy nfsen.conf
+  template: src=nfsen.conf.j2 dest=/etc/nfsen.conf
+            owner=root group=root mode=0644
+  notify: reconfig nfsend
+
+- name: check if nfsen is installed
+  stat: path={{nfsen_prefix}}/bin/nfsend
+  register: nfsen_stat
+
+- name: get nfsen archive
+  get_url: url={{nfsen_url}} dest={{nfsen_src_dir}}
+  register: nfsen_get_url
+
+- name: extract nfsen archive
+  command: >
+      chdir={{nfsen_src_dir}}
+      creates={{nfsen_src_dir}}/{{nfsen_version}}
+      tar xzf {{nfsen_version}}.tar.gz
+
+- name: copy nfsen install patch
+  when: nfsen_get_url.changed or not nfsen_stat.stat.exists
+  register: nfsen_patch
+  copy: >
+      src=nfsen-install-no-prompt.patch
+      dest={{nfsen_src_dir}}/{{nfsen_version}}/nfsen-install-no-prompt.patch
+
+- name: update install.pl to not prompt
+  when: nfsen_patch.changed
+  shell: chdir={{nfsen_src_dir}}/{{nfsen_version}}
+         patch < nfsen-install-no-prompt.patch
+
+- name: install nfsen
+  when: nfsen_get_url.changed or not nfsen_stat.stat.exists
+  command: >
+      chdir={{nfsen_src_dir}}/{{nfsen_version}}
+      ./install.pl /etc/nfsen.conf
+
+- name: enable and start nfsend
+  service: name=nfsend state=started enabled=yes pattern=bin/nfsend

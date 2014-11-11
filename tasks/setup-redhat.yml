@@ -1,0 +1,4 @@
+---
+- name: install nfdump
+  yum: name={{item}} state=installed
+  with_items: nfsen_prereqs
