@@ -1,0 +1,20 @@
+--- install.pl.orig	2013-12-11 10:19:05.872650548 -0800
++++ install.pl	2013-12-11 10:20:31.583650960 -0800
+@@ -92,11 +92,12 @@
+ 	my $ans;
+ 	$whichperl = FindCommand("perl");
+ 	if ( defined $whichperl ) {
+-		print "Perl to use: [$whichperl] ";
+-		chomp($ans = <STDIN>);
+-		if ( length $ans ) {
+-			$whichperl = $ans;
+-		}
++        ; # do nothing
++#		print "Perl to use: [$whichperl] ";
++#		chomp($ans = <STDIN>);
++#		if ( length $ans ) {
++#			$whichperl = $ans;
++#		}
+ 	} else {
+ 		print "No Perl found in your PATH. Please specify where to find perl [] ";
+ 		chomp($whichperl = <STDIN>);
