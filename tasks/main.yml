@@ -7,7 +7,7 @@
   when: ansible_os_family == "RedHat"
 
 - name: ensure netflow user
-  user: name={{nfsen_user}} group=apache createhome=no
+  user: name={{nfsen_user}} groups=apache createhome=no
 
 - name: deploy nfsen.conf
   template: src=nfsen.conf.j2 dest=/etc/nfsen.conf
