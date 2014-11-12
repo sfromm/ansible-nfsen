@@ -6,3 +6,12 @@ nfsen_src_dir: /usr/local/src
 nfsen_prefix: /usr/local
 nfsen_user: netflow
 nfsen_group: netflow
+# the following serves only as an example
+# of what the netmon has/dictionary/mapping looks like.
+netmon:
+    devices:
+        - name: localhost
+          netflow:
+              port: 9995
+              col: "#ff0000"
+              type: netflow
