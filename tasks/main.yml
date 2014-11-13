@@ -46,11 +46,23 @@
       chdir={{nfsen_src_dir}}/{{nfsen_version}}
       ./install.pl /etc/nfsen.conf
 
-- name: template nfsend init script
+- name: check for systemd
+  stat: path=/usr/bin/systemctl
+  register: stat_systemd
+
+- name: template nfsen.service
+  when: stat_systemd.stat.exists
   template: >
-      src=nfsend.j2
-      dest=/etc/init.d/nfsend
+      src=nfsen.service.j2
+      dest=/etc/systemd/system/nfsen.service
+      owner=root group=root mode=0755
+
+- name: template nfsen init script
+  when: not stat_systemd.stat.exists
+  template: >
+      src=nfsen.j2
+      dest=/etc/init.d/nfsen
       owner=root group=root mode=0755
 
 - name: enable and start nfsend
-  service: name=nfsend state=started enabled=yes pattern=bin/nfsend
+  service: name=nfsen state=started enabled=yes pattern=bin/nfsend

@@ -1,0 +1,14 @@
+[Unit]
+Description=NFSen
+After=remote-fs.target network.target network-online.target syslog.target
+
+[Service]
+Type=forking
+ExecStart={{nfsen_prefix}}/bin/nfsen start
+ExecStop={{nfsen_prefix}}/bin/nfsen stop
+PIDFile=/var/run/nfsen/nfsend.pid
+;Restart=on-failure
+;RestartSec=300s
+
+[Install]
+WantedBy=multi-user.target
