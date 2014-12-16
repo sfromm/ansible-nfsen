@@ -22,25 +22,25 @@ $BASEDIR = "/";
 
 #
 # Where to install the NfSen binaries
-$BINDIR="${BASEDIR}/usr/local/bin";
+$BINDIR="{{nfsen_bindir}}";
 
 #
 # Where to install the NfSen Perl modules
-$LIBEXECDIR="${BASEDIR}/usr/local/libexec/nfsen";
+$LIBEXECDIR="{{nfsen_libexecdir}}";
 
 #
 # Where to install the config files
-$CONFDIR="${BASEDIR}/etc";
+$CONFDIR="{{nfsen_confdir}}";
 
 #
 # Var space for NfSen
-$VARDIR="${BASEDIR}/var/lib/nfsen";
+$VARDIR="{{nfsen_vardir}}";
 
 #
 # NfSen html pages directory:
 # All php scripts will be installed here.
 # URL: Entry point for nfsen: http://<webserver>/nfsen/nfsen.php
-$HTMLDIR="${BASEDIR}/var/www/nfsen";
+$HTMLDIR="{{nfsen_htmldir}}";
 
 #
 # Where to install the docs
@@ -48,7 +48,7 @@ $DOCDIR="${HTMLDIR}/doc";
 
 #
 # directory for all pid files
-$PIDDIR="${BASEDIR}/var/run/nfsen";
+$PIDDIR="{{nfsen_piddir}}";
 
 #
 # Filter directory
@@ -178,7 +178,7 @@ $low_water = 90;
 # Note: nfsen is very chatty for level 'debug' and 'info'
 # For normal operation, you may set the logging level in syslog.conf
 # to warning or error unless you want to debug NfSen
-$syslog_facility = 'daemon';
+$syslog_facility = '{{nfsen_syslog_facility}}';
 
 #
 # SYSLOG mess 
@@ -234,10 +234,10 @@ $syslog_facility = 'daemon';
 #
 # Alert module: email alerting:
 # Use this from address 
-$MAIL_FROM   = 'nobody@nero.net';
+$MAIL_FROM   = "{{nfsen_mail_from}}";
 
 # Use this SMTP server
-$SMTP_SERVER = 'localhost';
+$SMTP_SERVER = "{{nfsen_smtp_server}}";
 
 # Use this email body:
 # You may have multiple lines of text.

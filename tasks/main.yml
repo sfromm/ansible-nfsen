@@ -6,6 +6,13 @@
 - include: setup-redhat.yml
   when: ansible_os_family == "RedHat"
 
+- name: set php timezone
+  lineinfile: >
+      dest=/etc/php.ini
+      regexp="^.?date.timezone = "
+      line="date.timezone = '{{nfsen_php_timezone}}'"
+      insertafter=EOF
+
 - name: ensure netflow user
   user: name={{nfsen_user}} groups=apache createhome=no
 
