@@ -213,7 +213,9 @@ $syslog_facility = '{{nfsen_syslog_facility}}';
 
 @plugins = (
     # profile    # module
-    # [ '*',     'demoplugin' ],
+{% for plugin in nfsen_plugins %}
+    [ '{{plugin.profile}}', '{{plugin.name}}' ],
+{% endfor %}
 );
 
 %PluginConf = (

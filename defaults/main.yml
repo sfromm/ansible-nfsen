@@ -16,6 +16,13 @@ nfsen_group: netflow
 nfsen_syslog_facility: daemon
 nfsen_mail_from: nobody@localhost
 nfsen_smtp_server: localhost
+# Plugins
+nfsen_plugins:
+    - name: live
+      profile: PortTracker
+# porttracker plugin
+nfsen_portsdbdir: "{{nfsen_vardir}}/portsdb"
+# Netmon
 # the following serves only as an example
 # of what the netmon has/dictionary/mapping looks like.
 netmon:

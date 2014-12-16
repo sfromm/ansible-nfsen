@@ -25,7 +25,12 @@
   stat: path={{nfsen_bindir}}/nfsend
   register: nfsen_stat
 
+- name: check for nfsen archive
+  stat: path={{nfsen_src_dir}}/{{nfsen_version}}.tar.gz
+  register: nfsen_archive_stat
+
 - name: get nfsen archive
+  when: not nfsen_archive_stat.stat.exists
   get_url: url={{nfsen_url}} dest={{nfsen_src_dir}}
   register: nfsen_get_url
 
@@ -70,6 +75,30 @@
       src=nfsen.j2
       dest=/etc/init.d/nfsen
       owner=root group=root mode=0755
+
+- name: deploy porttracker plugin
+  command: >-
+      chdir={{nfsen_src_dir}}/{{nfsen_version}}
+      creates={{item.dest}}/{{item.src}}
+      cp contrib/PortTracker/{{item.src}} {{item.dest}}/{{item.src}}
+  with_items:
+      - { src: PortTracker.pm,  dest: "{{nfsen_vardir}}/plugins" }
+      - { src: PortTracker.php, dest: "{{nfsen_htmldir}}/plugins" }
+
+- name: set portsdbdir for porttracker
+  lineinfile: >-
+      dest={{nfsen_vardir}}/plugins/PortTracker.pm
+      regexp="my \$PORTSDBDIR = "
+      line="my $PORTSDBDIR = '{{nfsen_portsdbdir}}';"
+      insertafter=EOF
+
+- name: create porttracker directory
+  file: path={{nfsen_portsdbdir}} state=directory owner=netflow group=apache mode=0775
+
+- name: create porttracker directories
+  command: >
+      creates={{nfsen_portsdbdir}}/ports.stat
+      nftrack -I -d {{nfsen_portsdbdir}}
 
 - name: enable and start nfsend
   service: name=nfsen state=started enabled=yes pattern=bin/nfsend
