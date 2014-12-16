@@ -14,7 +14,7 @@ nfsen_htmldir: /var/www/nfsen
 nfsen_user: netflow
 nfsen_group: netflow
 nfsen_syslog_facility: daemon
-nfsen_mail_from: nobody@localhost
+nfsen_mail_from: nobody\@localhost
 nfsen_smtp_server: localhost
 # Plugins
 nfsen_plugins:
