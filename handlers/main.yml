@@ -4,4 +4,4 @@
   service: name=nfsend state=restarted
 
 - name: reconfig nfsend
-  shell: yes | "{{nfsen_bindir}}/nfsen reconfig"
+  shell: /usr/bin/yes | "{{nfsen_bindir}}/nfsen reconfig"
