@@ -22,7 +22,7 @@
   notify: reconfig nfsend
 
 - name: check if nfsen is installed
-  stat: path={{nfsen_prefix}}/bin/nfsend
+  stat: path={{nfsen_bindir}}/nfsend
   register: nfsen_stat
 
 - name: get nfsen archive
