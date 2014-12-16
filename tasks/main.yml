@@ -18,7 +18,7 @@
 
 - name: deploy nfsen.conf
   template: src=nfsen.conf.j2 dest=/etc/nfsen.conf
-            owner=root group=root mode=0644
+            owner=root group=root mode=0644 backup=yes
   notify: reconfig nfsend
 
 - name: check if nfsen is installed
