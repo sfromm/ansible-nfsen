@@ -44,12 +44,13 @@ The following variables control what paths are used by **nfsen**.
   */var/www/nfsen*.
 
 
-The netmon dictionary should look something like (in YAML):
+The *netmon* dictionary should look something like (in YAML):
 
     netmon:
         devices:
             - name: my_switch.example.net
-              netflow:
+              ext:
+                nfsen:
                   port: 9995
                   col: #ff00ff
                   type: netflow
@@ -61,6 +62,7 @@ The parameters to the netflow dictionary are:
 - **col**: The color used in nfsen graphs
 - **type**: Can be either *netflow* or *sflow*.
 
+For more information regarding *netmon*, please see: [netmon.org](netmon.org).
 
 Dependencies
 ------------
@@ -70,11 +72,11 @@ Depends on [sfromm.epel](https://galaxy.ansible.com/list#/roles/1948).
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+A simple example:
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: sfromm.nfsen }
 
 License
 -------

@@ -160,8 +160,8 @@ $PROFILERS = 6;
 
 %sources = (
 {% for dev in netmon.devices %}
-{%     if 'netflow' in dev %}
-    '{{dev.name}}' => { 'port' => '{{dev.netflow.port}}', 'col' => '{{dev.netflow.col}}', 'type' => '{{dev.netflow.type}}' },
+{%     if 'ext' in dev and 'nfsen' in dev['ext'] %}
+    '{{ dev.name }}' => { 'port' => '{{ dev.ext.nfsen.port }}', 'col' => '{{ dev.ext.nfsen.col }}', 'type' => '{{ dev.ext.nfsen.type }}' },
 {%     endif %}
 {% endfor %}
 );

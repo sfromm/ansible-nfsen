@@ -28,7 +28,8 @@ nfsen_portsdbdir: "{{nfsen_vardir}}/portsdb"
 netmon:
     devices:
         - name: localhost
-          netflow:
-              port: 9995
-              col: "#ff0000"
-              type: netflow
+          ext:
+              nfsen:
+                  port: 9995
+                  col: "#ff0000"
+                  type: netflow
