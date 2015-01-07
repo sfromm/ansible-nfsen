@@ -13,7 +13,7 @@
       line="date.timezone = '{{nfsen_php_timezone}}'"
       insertafter=EOF
 
-- name: ensure netflow user
+- name: ensure nfsen user
   user: name={{nfsen_user}} groups=apache createhome=no
 
 - name: deploy nfsen.conf
@@ -93,7 +93,7 @@
       insertafter=EOF
 
 - name: create porttracker directory
-  file: path={{nfsen_portsdbdir}} state=directory owner=netflow group=apache mode=0775
+  file: path={{nfsen_portsdbdir}} state=directory owner={{nfsen_group}} group=apache mode=0775
 
 - name: create porttracker directories
   command: >
