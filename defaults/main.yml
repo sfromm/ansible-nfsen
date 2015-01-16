@@ -11,6 +11,8 @@ nfsen_confdir: /etc
 nfsen_vardir: /var/lib/nfsen
 nfsen_piddir: /var/run/nfsen
 nfsen_htmldir: /var/www/nfsen
+nfsen_backend_plugindir: "{{ nfsen_vardir }}/plugins"
+nfsen_frontend_plugindir: "{{ nfsen_htmldir }}/plugins"
 nfsen_user: netflow
 nfsen_group: netflow
 nfsen_syslog_facility: daemon
