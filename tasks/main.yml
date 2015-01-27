@@ -52,6 +52,14 @@
   shell: chdir={{nfsen_src_dir}}/{{nfsen_version}}
          patch < nfsen-install-no-prompt.patch
 
+- name: create pid dir
+  file: >
+      path={{ nfsen_piddir }}
+      state=directory
+      owner={{ nfsen_user }}
+      group={{ nfsen_group }}
+      mode=0775
+
 - name: install nfsen
   when: nfsen_get_url.changed or not nfsen_stat.stat.exists
   command: >
