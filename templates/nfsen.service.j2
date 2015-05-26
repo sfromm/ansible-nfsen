@@ -4,7 +4,7 @@ After=remote-fs.target network.target network-online.target syslog.target
 
 [Service]
 Type=forking
-ExecStartPre=/usr/bin/mkdir /var/run/nfsen ; /usr/bin/chown netflow:netflow /var/run/nfsen
+ExecStartPre=/usr/bin/mkdir -p /var/run/nfsen ; /usr/bin/chown netflow:netflow /var/run/nfsen
 ExecStart={{nfsen_bindir}}/nfsen start
 ExecStop={{nfsen_bindir}}/nfsen stop
 PIDFile={{nfsen_piddir}}/nfsend.pid
