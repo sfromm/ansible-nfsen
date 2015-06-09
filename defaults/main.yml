@@ -24,6 +24,49 @@ nfsen_plugins:
       profile: live
 # porttracker plugin
 nfsen_portsdbdir: "{{nfsen_vardir}}/portsdb"
+#
+# Colors
+nfsen_colors:
+  - "#ff0000"
+  - "#f20000"
+  - "#e58273"
+  - "#734139"
+  - "#591800"
+  - "#bf6930"
+  - "#e6c3ac"
+  - "#ffc480"
+  - "#664e33"
+  - "#a66f00"
+  - "#ffcc00"
+  - "#595300"
+  - "#aab32d"
+  - "#ccff00"
+  - "#aab386"
+  - "#2f3326"
+  - "#89f279"
+  - "#00ff00"
+  - "#336633"
+  - "#73e6cf"
+  - "#165955"
+  - "#73cfe6"
+  - "#335566"
+  - "#004b8c"
+  - "#73b0e6"
+  - "#0000ff"
+  - "#0000e6"
+  - "#00004d"
+  - "#7373e6"
+  - "#202040"
+  - "#5b238c"
+  - "#b800e6"
+  - "#aa86b3"
+  - "#e673cf"
+  - "#bf0066"
+  - "#66334e"
+  - "#cc0036"
+  - "#590018"
+  - "#ff80a2"
+  - "#cc99a7"
 # Netmon
 # the following serves only as an example
 # of what the netmon has/dictionary/mapping looks like.
@@ -35,3 +78,4 @@ netmon:
                   port: 9995
                   col: "#ff0000"
                   type: netflow
+)

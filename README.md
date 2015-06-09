@@ -27,6 +27,8 @@ inventory:
   Defaults to *localhost*.
 - **nfsen_syslog_facility**:  Syslog facility used by **nfsen** for
   logging.  Defaults to *daemon*.
+- **nfsen_colors**:  A list of hexadecimal colors to use for profiles.
+  This is used if you do not define a color per netflow source.
 
 The following variables control what paths are used by **nfsen**.
 
