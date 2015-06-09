@@ -78,4 +78,3 @@ netmon:
                   port: 9995
                   col: "#ff0000"
                   type: netflow
-)
