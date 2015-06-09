@@ -161,7 +161,7 @@ $PROFILERS = 6;
 %sources = (
 {% for dev in netmon.devices %}
 {%     if 'ext' in dev and 'nfsen' in dev['ext'] %}
-    '{{ dev.name }}' => { 'port' => '{{ dev.ext.nfsen.port }}', 'col' => {% if 'col' in dev.ext.nfsen %}'{{ dev.ext.nfsen.col }}'{% else %}'{{ nfsen_colors.index0 }}'{% endif %}, 'type' => '{{ dev.ext.nfsen.type }}' },
+    '{{ dev.name }}' => { 'port' => '{{ dev.ext.nfsen.port }}', 'col' => {% if 'col' in dev.ext.nfsen %}'{{ dev.ext.nfsen.col }}'{% else %}'{{ nfsen_colors[loop.index0] }}'{% endif %}, 'type' => '{{ dev.ext.nfsen.type }}' },
 {%     endif %}
 {% endfor %}
 );
